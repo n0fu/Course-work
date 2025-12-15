@@ -22,6 +22,7 @@ public:
     void DrawFigure(sf::RenderWindow& window);
     sf::Vector2f GetFigurePosition();
     sf::Vector2f GetFigureSize();
+    sf::Vector2f GetFigureCenter();
     void SetSelected(bool sel);
     void SetFigurePosition(sf::Vector2f pos);
 };

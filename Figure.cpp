@@ -60,6 +60,10 @@ sf::Vector2f Figure::GetFigureSize(){
     return  sf::Vector2f(figure.getSize().x, figure.getSize().y);
 }
 
+sf::Vector2f Figure::GetFigureCenter(){
+    return  sf::Vector2f(figure.getPosition().x + figure.getSize().x/2, figure.getPosition().y + figure.getSize().y/2);
+}
+
 void Figure::SetSelected(bool sel){
     selected = sel;
 }

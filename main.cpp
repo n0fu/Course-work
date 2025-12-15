@@ -6,6 +6,7 @@
 int main(){
     sf::RenderWindow window(sf::VideoMode(800, 600), "SFML 2.6.2 Project");
     Action action;
+
     while (window.isOpen())
     {
         sf::Event event;
