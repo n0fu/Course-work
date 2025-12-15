@@ -1,16 +1,16 @@
 #include "Interface.h"
 
-Button::Button(){
+Button::Button(sf::Vector2f pos, std::string text){
     button_color = sf::Color::Blue;
     text_color = sf::Color::White;
     
     text_size = 20;
-    text_string = "Button";
+    text_string = text;
     if (!font.loadFromFile("arial.ttf")) {
         font.loadFromFile("C:/Windows/Fonts/arial.ttf");
     }
 
-    position = sf::Vector2f(0, 0);
+    position = pos;
     text_button.setCharacterSize(text_size);
     text_button.setFillColor(text_color);
     text_button.setString(text_string);
@@ -49,20 +49,30 @@ sf::Vector2f Button::GetButtonSize(){
     return sf::Vector2f(button.getGlobalBounds().width, button.getGlobalBounds().height);
 }
 
-File::File(std::string text, sf::Vector2f position): Button(){
-    text_string = text;
+void Button::SetButtonPosition(sf::Vector2f position){
     this->position = position;
     UpdateButton();
 }
 
-Settings::Settings(std::string text, sf::Vector2f position): Button(){
-    text_string = text;
-    this->position = position;
+void Button::SetButtonText(std::string text){
+    this->text_string = text;
     UpdateButton();
 }
 
-AddNote::AddNote(std::string text, sf::Vector2f position): Button(){
-    text_string = text;
-    this->position = position;
-    UpdateButton();
-}
+// File::File(std::string text, sf::Vector2f position): Button(){
+//     text_string = text;
+//     this->position = position;
+//     UpdateButton();
+// }
+
+// Settings::Settings(std::string text, sf::Vector2f position): Button(){
+//     text_string = text;
+//     this->position = position;
+//     UpdateButton();
+// }
+
+// AddNote::AddNote(std::string text, sf::Vector2f position): Button(){
+//     text_string = text;
+//     this->position = position;
+//     UpdateButton();
+// }

@@ -13,25 +13,27 @@ protected:
     unsigned int text_size;
 
 public:
-    Button();
+    Button(sf::Vector2f pos, std::string text);
     void DrawButton(sf::RenderWindow& window);
     void UpdateButton();
+    void SetButtonPosition(sf::Vector2f pos);
+    void SetButtonText(std::string text);
     sf::Vector2f GetButtonPosition();
     sf::Vector2f GetButtonSize();
 };
 
 
-class File: public Button{
-public:
-    File(std::string text, sf::Vector2f position);
-};
+// class File: public Button{
+// public:
+//     File(std::string text, sf::Vector2f position);
+// };
 
-class Settings: public Button{
-public:
-    Settings(std::string text, sf::Vector2f position);
-};
+// class Settings: public Button{
+// public:
+//     Settings(std::string text, sf::Vector2f position);
+// };
 
-class AddNote: public Button{
-public:
-    AddNote(std::string text, sf::Vector2f position);
-};
+// class AddNote: public Button{
+// public:
+//     AddNote(std::string text, sf::Vector2f position);
+// };

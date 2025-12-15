@@ -20,7 +20,8 @@ public:
     Figure(sf::RenderWindow& window);
     void UpdateFigure();
     void DrawFigure(sf::RenderWindow& window);
-    
-
-
+    sf::Vector2f GetFigurePosition();
+    sf::Vector2f GetFigureSize();
+    void SetSelected(bool sel);
+    void SetFigurePosition(sf::Vector2f pos);
 };

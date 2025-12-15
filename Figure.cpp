@@ -51,3 +51,20 @@ void Figure::DrawFigure(sf::RenderWindow& window){
     window.draw(figure);
     window.draw(text_figure);
 }
+
+sf::Vector2f Figure::GetFigurePosition(){
+    return  sf::Vector2f(figure.getPosition().x, figure.getPosition().y);
+}
+
+sf::Vector2f Figure::GetFigureSize(){
+    return  sf::Vector2f(figure.getSize().x, figure.getSize().y);
+}
+
+void Figure::SetSelected(bool sel){
+    selected = sel;
+}
+
+void Figure::SetFigurePosition(sf::Vector2f pos){
+    position = pos;
+    UpdateFigure();
+}
