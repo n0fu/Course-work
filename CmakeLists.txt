@@ -1,0 +1,33 @@
+cmake_minimum_required(VERSION 3.16)
+project(MySFMLProject)
+
+set(CMAKE_CXX_STANDARD 17)
+
+# Путь к SFML
+set(SFML_DIR "C:/SFML-2.6.2")
+
+# Создаем исполняемый файл
+add_executable(MySFMLProject main.cpp Figure.cpp Interface.cpp Action.cpp)
+
+# Подключаем SFML
+target_include_directories(MySFMLProject PRIVATE "${SFML_DIR}/include")
+target_link_directories(MySFMLProject PRIVATE "${SFML_DIR}/lib")
+
+target_link_libraries(MySFMLProject 
+    sfml-graphics
+    sfml-window
+    sfml-system
+)
+
+# Простое копирование DLL - работает в 99% случаев
+if(WIN32)
+    # Копируем ВСЕ DLL из SFML/bin в папку с исполняемым файлом
+    add_custom_command(TARGET MySFMLProject POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy
+            "${SFML_DIR}/bin/sfml-graphics-2.dll"
+            "${SFML_DIR}/bin/sfml-window-2.dll"
+            "${SFML_DIR}/bin/sfml-system-2.dll"
+            "$<TARGET_FILE_DIR:MySFMLProject>"
+        COMMENT "Copying SFML DLLs"
+    )
+endif()
