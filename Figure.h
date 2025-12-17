@@ -18,11 +18,18 @@ private:
 
 public:
     Figure(sf::RenderWindow& window);
+    Figure(sf::RenderWindow& window, sf::Vector2f pos);
     void UpdateFigure();
     void DrawFigure(sf::RenderWindow& window);
     sf::Vector2f GetFigurePosition();
     sf::Vector2f GetFigureSize();
     sf::Vector2f GetFigureCenter();
+    std::string GetFigureText();
+    sf::Color GetFigureColor();
+    unsigned int GetFigureTextSize();
     void SetSelected(bool sel);
+    void SetFigureColor(sf::Color col);
+    void SetFigureText(std::string text);
+    void SetFigureTextSize(unsigned int size);
     void SetFigurePosition(sf::Vector2f pos);
 };

@@ -11,29 +11,36 @@ Button::Button(sf::Vector2f pos, std::string text){
     }
 
     position = pos;
+    // ========== НАЧАЛО ИСПРАВЛЕНИЯ: Правильная начальная настройка ==========
+    text_button.setFont(font);
     text_button.setCharacterSize(text_size);
     text_button.setFillColor(text_color);
     text_button.setString(text_string);
-    text_button.setPosition(position.x, position.y);
-    text_button.setFont(font);
-
-    button.setFillColor(button_color);
-    button.setPosition(position.x - 5, position.y + 5);
-    button.setSize(sf::Vector2f(text_button.getGlobalBounds().width + 10, text_button.getGlobalBounds().height + 10));
+    // ========== КОНЕЦ ИСПРАВЛЕНИЯ ==========
 
     UpdateButton();
 }
 
 void Button::UpdateButton(){
+    // ========== НАЧАЛО ИСПРАВЛЕНИЯ: Аккуратное выравнивание текста кнопки ==========
     text_button.setCharacterSize(text_size);
     text_button.setFillColor(text_color);
     text_button.setString(text_string);
-    text_button.setPosition(position.x, position.y);
     text_button.setFont(font);
 
+    // Получаем размеры текста
+    sf::FloatRect textBounds = text_button.getLocalBounds();
+    sf::Vector2f buttonSize(textBounds.width + 20, textBounds.height + 20);
+    
+    // Настраиваем кнопку
     button.setFillColor(button_color);
-    button.setPosition(position.x - 5, position.y + 5);
-    button.setSize(sf::Vector2f(text_button.getGlobalBounds().width + 10, text_button.getGlobalBounds().height + 10));
+    button.setPosition(position);
+    button.setSize(buttonSize);
+    
+    // Центрируем текст внутри кнопки
+    text_button.setOrigin(textBounds.left + textBounds.width / 2, textBounds.top + textBounds.height / 2);
+    text_button.setPosition(position.x + buttonSize.x / 2, position.y + buttonSize.y / 2);
+    // ========== КОНЕЦ ИСПРАВЛЕНИЯ ==========
 }
 
 void Button::DrawButton(sf::RenderWindow &window){
@@ -59,20 +66,28 @@ void Button::SetButtonText(std::string text){
     UpdateButton();
 }
 
-// File::File(std::string text, sf::Vector2f position): Button(){
-//     text_string = text;
-//     this->position = position;
-//     UpdateButton();
-// }
+bool Button::IsMouseOnButton(sf::Vector2f mouse_pos){
+    return button.getGlobalBounds().contains(mouse_pos);
+}
 
-// Settings::Settings(std::string text, sf::Vector2f position): Button(){
-//     text_string = text;
-//     this->position = position;
-//     UpdateButton();
-// }
+void Button::SetButtonSize(sf::Vector2f size) {
+    button.setSize(size);
+    // Перецентрируем текст
+    sf::FloatRect textBounds = text_button.getLocalBounds();
+    text_button.setOrigin(textBounds.left + textBounds.width / 2, textBounds.top + textBounds.height / 2);
+    text_button.setPosition(position.x + size.x / 2, position.y + size.y / 2);
+}
 
-// AddNote::AddNote(std::string text, sf::Vector2f position): Button(){
-//     text_string = text;
-//     this->position = position;
-//     UpdateButton();
-// }
+void Button::SetButtonColor(sf::Color color) {
+    button_color = color;
+    button.setFillColor(button_color);
+}
+
+void Button::SetButtonTextColor(sf::Color color) {
+    text_color = color;
+    text_button.setFillColor(text_color);
+}
+
+sf::Color Button::GetButtonColor() const {
+    return button_color;
+}

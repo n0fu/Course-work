@@ -18,22 +18,11 @@ public:
     void UpdateButton();
     void SetButtonPosition(sf::Vector2f pos);
     void SetButtonText(std::string text);
+    void SetButtonSize(sf::Vector2f size);
+    void SetButtonColor(sf::Color color);
+    void SetButtonTextColor(sf::Color color);
+    sf::Color GetButtonColor() const;
     sf::Vector2f GetButtonPosition();
     sf::Vector2f GetButtonSize();
+    bool IsMouseOnButton(sf::Vector2f mouse_pos);
 };
-
-
-// class File: public Button{
-// public:
-//     File(std::string text, sf::Vector2f position);
-// };
-
-// class Settings: public Button{
-// public:
-//     Settings(std::string text, sf::Vector2f position);
-// };
-
-// class AddNote: public Button{
-// public:
-//     AddNote(std::string text, sf::Vector2f position);
-// };
