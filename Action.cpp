@@ -4,8 +4,6 @@ Action::Action()
 {
     selected_figure = nullptr;
     
-    // ========== НАЧАЛО ИСПРАВЛЕНИЯ: Минимальные интервалы между кнопками ==========
-    
     file_button = new Button({0, 0}, "file");
     file_button->SetButtonColor(sf::Color::White);
     file_button->SetButtonTextColor(sf::Color::Black);
@@ -29,13 +27,11 @@ Action::Action()
     delete_connection_button = new Button({connect_button->GetButtonSize().x + connect_button->GetButtonPosition().x, 0}, "delete connection");
     delete_connection_button->SetButtonColor(sf::Color::White);
     delete_connection_button->SetButtonTextColor(sf::Color::Black);
-    // ========== КОНЕЦ ИСПРАВЛЕНИЯ ==========
     
     edit_menu = new EditMenu();
 }
 
 void Action::HandleEvent(sf::Event& event, sf::RenderWindow& window){
-    // ========== НАЧАЛО ДОБАВЛЕННОГО КОДА: Обработка ввода текста ==========
     if (event.type == sf::Event::TextEntered && edit_menu->IsTextEditing()) {
         edit_menu->HandleTextInput(static_cast<char>(event.text.unicode));
     }
@@ -43,7 +39,6 @@ void Action::HandleEvent(sf::Event& event, sf::RenderWindow& window){
     if (event.type == sf::Event::KeyPressed && edit_menu->IsTextEditing()) {
         edit_menu->HandleKeyPress(event.key.code);
     }
-    // ========== КОНЕЦ ДОБАВЛЕННОГО КОДА ==========
 
     if (event.type == sf::Event::MouseMoved){
         sf::Vector2f mousePos(event.mouseMove.x, event.mouseMove.y);
@@ -55,7 +50,6 @@ void Action::HandleEvent(sf::Event& event, sf::RenderWindow& window){
         sf::Vector2f mousePos(event.mouseButton.x, event.mouseButton.y);
         sf::Vector2f worldMousePos = MapPixelToWorld(sf::Vector2i(event.mouseButton.x, event.mouseButton.y), window);
         
-        // ========== НАЧАЛО ДОБАВЛЕННОГО КОДА: Правый клик для показа меню ==========
         if (event.mouseButton.button == sf::Mouse::Right) {
             for (auto& figure : figures) {
                 if (IsMouseOnFigure(figure.get(), worldMousePos)) {
@@ -112,7 +106,6 @@ void Action::HandleEvent(sf::Event& event, sf::RenderWindow& window){
                 edit_menu->HideMenu();
             }
         }
-        // ========== КОНЕЦ ДОБАВЛЕННОГО КОДА ==========
         
         if (IsMouseOnButton(file_button, mousePos)){
             // Простое меню - Ctrl для сохранения, иначе загрузка
@@ -184,18 +177,6 @@ void Action::HandleEvent(sf::Event& event, sf::RenderWindow& window){
                     delcon_figure2 = nullptr;
                     }
                 }
-            // } else {
-            //     for (auto it = connections.begin(); it != connections.end();){
-            //         if (((*it)->GetFigure1() == delcon_figure1 && (*it)->GetFigure2() == delcon_figure2) ||
-            //             ((*it)->GetFigure1() == delcon_figure2 && (*it)->GetFigure2() == delcon_figure1)){
-            //                 it = connections.erase(it);
-            //                 break;
-            //             } else {
-            //                 ++it;
-            //         }
-            //     }
-            //     delcon_figure1 = nullptr;
-            //     delcon_figure2 = nullptr;
             }
         } else {
             delete_connection_button->SetButtonColor(sf::Color::White);
