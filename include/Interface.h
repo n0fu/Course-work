@@ -21,8 +21,8 @@ public:
     void SetButtonSize(sf::Vector2f size);
     void SetButtonColor(sf::Color color);
     void SetButtonTextColor(sf::Color color);
+    bool IsMouseOnButton(sf::Vector2f mousePos);
     sf::Color GetButtonColor() const;
     sf::Vector2f GetButtonPosition();
     sf::Vector2f GetButtonSize();
-    bool IsMouseOnButton(sf::Vector2f mouse_pos);
 };

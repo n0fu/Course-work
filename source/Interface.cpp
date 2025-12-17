@@ -66,10 +66,6 @@ void Button::SetButtonText(std::string text){
     UpdateButton();
 }
 
-bool Button::IsMouseOnButton(sf::Vector2f mouse_pos){
-    return button.getGlobalBounds().contains(mouse_pos);
-}
-
 void Button::SetButtonSize(sf::Vector2f size) {
     button.setSize(size);
     // Перецентрируем текст
@@ -90,4 +86,8 @@ void Button::SetButtonTextColor(sf::Color color) {
 
 sf::Color Button::GetButtonColor() const {
     return button_color;
+}
+
+bool Button::IsMouseOnButton(sf::Vector2f mousePos) {
+    return button.getGlobalBounds().contains(mousePos);
 }

@@ -66,7 +66,7 @@ int main(){
 
         }
 
-        window.clear(sf::Color::White);
+        window.clear(action.GetBackgroundColor());
         
         // Рисуем фигуры и соединения в подвижной области
         window.setView(worldView);
